@@ -5,7 +5,7 @@
     <div class="header-right clear-fix">
       <FullScreen />
       <LangSelect />
-      <GitHubLink />
+  
       <UserAvatar />
     </div>
   </div>

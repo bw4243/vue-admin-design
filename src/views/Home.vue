@@ -14,15 +14,15 @@
       </div>
     </div>
     <el-row class="date-box" :gutter="20">
-      <el-col :span="8">
+      <el-col :span="12">
         <el-card shadow="always" :body-style="{padding: '0px'}">
           <ChartsPie :title="text" type="pie" :data="chartsPieData" class="data-desc" />
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="12">
         <el-card shadow="always" :body-style="{padding: '0px'}">
           <div class="data-desc data-lang-box">
-            <div class="data-lang-title">项目语言构成</div>
+            <div class="data-lang-title">部门监督数据量Top5</div>
             <div v-for="(item, index) in langsData" :key="index" class="data-lang-item">
               <label>{{ item.name }}</label>
               <el-progress :percentage="item.value" :stroke-width="16" :color="item.color" />
@@ -30,11 +30,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8">
-        <el-card shadow="always" :body-style="{padding: '0px'}">
-          <ChartsPie :title="text" type="ring" :data="chartsPieData" class="data-desc" />
-        </el-card>
-      </el-col>
+      
     </el-row>
     <el-row class="date-box" :gutter="20">
       <el-col :span="12">
@@ -61,28 +57,26 @@ export default {
   components: { CountTo, ChartsPie, ChartsBar, ChartsLine },
   data() {
     return {
-      text: '用户访问来源',
+      text: '数据来源',
       title: '近七天用户访问量条形图',
       langsData: [
-        { name: 'VUE', value: 45, color: '#2d8cf0' },
-        { name: 'ES6', value: 32, color: '#19be6b' },
-        { name: 'TS', value: 4, color: '#ff9900' },
-        { name: 'LESS', value: 13, color: '#e46cbb' },
-        { name: 'HTML', value: 6, color: '#9a66e4' }
+        { name: '监督办公室', value: 45, color: '#2d8cf0' },
+        { name: '计划财务部', value: 32, color: '#19be6b' },
+        { name: '内审法务部', value: 4, color: '#ff9900' },
+        { name: '合约管理部', value: 13, color: '#e46cbb' },
+        { name: '信息中心', value: 6, color: '#9a66e4' }
       ],
       cardInfoData: [
-        { title: '今日点击', icon: 'vue-dsn-icon-dianji', count: 682, color: '#2d8cf0' },
-        { title: '新增用户', icon: 'vue-dsn-icon-xinzeng', count: 259, color: '#19be6b' },
-        { title: '信息发送', icon: 'vue-dsn-icon-xinfeng', count: 1262, color: '#ff9900' },
-        { title: '点赞统计', icon: 'vue-dsn-icon-dianzan', count: 508, color: '#e46cbb' },
-        { title: '累计收藏', icon: 'vue-dsn-icon-heart', count: 379, color: '#9a66e4' }
+        { title: '近期监督信息数量', icon: 'vue-dsn-icon-dianji', count: 5, color: '#2d8cf0' },
+        { title: '待处理监督信息', icon: 'vue-dsn-icon-xinzeng', count: 1, color: '#19be6b' },
+        { title: '超时处理', icon: 'vue-dsn-icon-xinfeng', count: 1, color: '#ff9900' }
       ],
       chartsPieData: [
-        { value: 1920, name: '直接访问' },
-        { value: 1169, name: '邮件营销' },
-        { value: 986, name: '联盟广告' },
-        { value: 621, name: '视频广告' },
-        { value: 3256, name: '搜索引擎' }
+        { value: 3, name: '监督邮箱' },
+        { value: 5, name: '监督小程序' },
+        { value: 24, name: '财务系统' },
+        { value: 9, name: '工程管理平台' },
+        { value: 3, name: '人力资源系统' }
       ],
       commonChartsData: {
         Mon: 782,

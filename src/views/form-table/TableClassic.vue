@@ -1,16 +1,19 @@
 <template>
   <div class="table-classic-wrapper">
     <Hints>
-      <template slot="hintName">Table表格组件</template>
+      <template slot="hintName">风险点大数据监督</template>
       <template slot="hintInfo">
-        <p>element-Table：使用elementUI的Table组件，可用于展示多条结构类似的数据，并对其进行相关操作</p>
-        <p>地址：访问 <el-link type="success" href="https://element.eleme.cn/2.13/TableClassic.vue#/zh-CN/component/table" target="_blank">element-Table</el-link></p>
+        <p>请及时处理跟进风险点</p>
       </template>
     </Hints>
     <el-card shadow="always">
       <!-- 操作栏 -->
       <div class="control-btns">
         <el-button type="primary" @click="handleCreate">新建数据</el-button>
+        <el-button type="primary" @click="expertHelp">专家协助</el-button>
+        <el-button type="primary" @click="yjDetail">预警详情</el-button>
+        <el-button type="primary" @click="ccCheck">抽查核验</el-button>
+
         <el-button type="primary" @click="handleImport">导入数据</el-button>
         <el-button type="primary" @click="exportVisible = true">导出数据</el-button>
         <el-button type="danger" @click="batchDelete">批量删除</el-button>
@@ -26,15 +29,14 @@
         <el-form-item label="编号">
           <el-input v-model="listQuery.id" placeholder="编号" />
         </el-form-item>
-        <el-form-item label="手机">
-          <el-input v-model="listQuery.phone" placeholder="手机" />
+        <el-form-item label="风险点">
+          <el-input v-model="listQuery.phone" placeholder="风险点" />
         </el-form-item>
-        <el-form-item label="婚姻状况">
-          <el-select v-model="listQuery.married" placeholder="婚姻状况">
-            <el-option :value="0" label="单身" />
-            <el-option :value="1" label="未婚" />
-            <el-option :value="2" label="已婚" />
-            <el-option :value="3" label="离异" />
+        <el-form-item label="处理状态">
+          <el-select v-model="listQuery.married" placeholder="处理状态">
+            <el-option :value="0" label="已处理" />
+            <el-option :value="1" label="未处理" />
+         
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -53,7 +55,7 @@
       >
         <el-table-column type="selection" width="60" />
         <el-table-column prop="id" label="编号" align="center" width="120" sortable />
-        <el-table-column prop="name" label="姓名" align="center">
+        <el-table-column prop="name" label="风险点" align="center">
           <template slot-scope="scope">
             <el-popover trigger="hover" placement="top">
               <p>姓名: {{ scope.row.name }}</p>
@@ -65,30 +67,22 @@
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column label="性别" align="center">
+        <el-table-column label="类别" align="center">
           <template slot-scope="scope">{{ scope.row.sex }}</template>
         </el-table-column>
-        <el-table-column prop="phone" label="手机" align="center" />
-        <el-table-column prop="education" label="学历" align="center" />
-        <el-table-column label="婚姻状况" align="center" width="100">
+        <el-table-column label="处理状态" align="center" width="100">
           <template slot-scope="scope">
-            <el-select v-model="scope.row.married" style="width: 80px" @change="selectChange(scope.row)">
-              <el-option :value="0" label="单身" />
-              <el-option :value="1" label="未婚" />
-              <el-option :value="2" label="已婚" />
-              <el-option :value="3" label="离异" />
+            <el-select v-model="scope.row.married" style="width: 200px" @change="selectChange(scope.row)">
+              <el-option :value="0" label="未处理" />
+              <el-option :value="1" label="已处理" />
+          
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="禁止编辑" align="center">
-          <template slot-scope="scope">
-            <el-switch v-model="scope.row.forbid" @change="stateChange(scope.row)" />
-          </template>
-        </el-table-column>
-        <el-table-column prop="hobby" label="爱好" align="center" width="300" show-overflow-tooltip />
+        
         <el-table-column label="操作" align="center" width="200">
           <template slot-scope="scope">
-            <el-button size="mini" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">处理</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -97,50 +91,214 @@
       <Pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize" @pagination="fetchData" />
       <!-- 新增/编辑 弹出栏 -->
       <el-dialog
-        title="编辑"
+        title="预警信息"
         :visible.sync="formVisible"
-        width="30%"
+        width="45%"
         class="dialog-form"
         :before-close="handleClose"
       >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>01 预警基本信息</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">费用申请名称：用餐报销申请-花园酒店0620</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">编号：00001</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">消费单位：天宁区花园酒店</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">消费金额：560</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">预警信息：招待费金额超标（超192元），需要进行核对确认！</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">模型名称：报销类数据分析模型</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">模型编号：Bx-0001</div></el-col>
+        </el-row>
+        
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">预警时间：2024-06-21</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">问题状态：待处理</div></el-col>
+        </el-row>
+       
         <el-form
           ref="dialogForm"
           :model="dialogForm"
-          :rules="formRules"
-          label-width="100px"
+          label-width="120px"
+          style="margin-top: 30px;color:black"
         >
-          <el-form-item label="姓名：" prop="name">
-            <el-input v-model="dialogForm.name" />
-          </el-form-item>
-          <el-form-item label="手机：" prop="phone">
-            <el-input v-model="dialogForm.phone" />
-          </el-form-item>
-          <el-form-item label="婚姻状况：" prop="married">
-            <el-select v-model="dialogForm.married">
-              <el-option :value="0" label="单身" />
-              <el-option :value="1" label="未婚" />
-              <el-option :value="2" label="已婚" />
-              <el-option :value="3" label="离异" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="爱好：" prop="hobby">
+         
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>02 处置决策</h2></div></el-col>
+        </el-row >
+         
+          <el-form-item label="核实结果：" prop="hobby">
             <el-checkbox-group v-model="dialogForm.hobby">
-              <el-checkbox label="羽毛球" name="hobby" />
-              <el-checkbox label="乒乓球" name="hobby" />
-              <el-checkbox label="篮球" name="hobby" />
-              <el-checkbox label="排球" name="hobby" />
-              <el-checkbox label="网球" name="hobby" />
-              <el-checkbox label="旱冰" name="hobby" />
-              <el-checkbox label="滑雪" name="hobby" />
-              <el-checkbox label="跳高" name="hobby" />
-              <el-checkbox label="冲浪" name="hobby" />
+              <el-checkbox label="确实有问题" name="hobby" />
+              <el-checkbox label="没问题，误判" name="hobby" />
             </el-checkbox-group>
           </el-form-item>
+          <el-form-item label="核实记录">
+            <el-input type="textarea" ></el-input>
+          </el-form-item>
+          <el-row class="yj-info">
+            <el-col :span="24"><div class="grid-content bg-purple">下一步：预警反馈</div></el-col>
+          </el-row >
           <div class="footer-item">
             <el-button @click="cancleForm">取 消</el-button>
-            <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">确 定</el-button>
+            <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">提交 </el-button>
           </div>
         </el-form>
+      </el-dialog>
+      <!-- 专家协助-->
+      <el-dialog
+        title="专家协助"
+        :visible.sync="formVisible2"
+        width="45%"
+        class="dialog-form"
+        :before-close="handleClose"
+      >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>01 预警基本信息</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">费用申请名称：用餐报销申请-花园酒店0620</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">编号：00001</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">消费单位：天宁区花园酒店</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">消费金额：560</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">预警信息：招待费金额超标（超192元），需要进行核对确认！</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">模型名称：报销类数据分析模型</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">模型编号：Bx-0001</div></el-col>
+        </el-row>
+        
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">预警时间：2024-06-21</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">问题状态：待处理</div></el-col>
+        </el-row>
+       
+        <el-form
+          ref="dialogForm"
+          :model="dialogForm"
+          label-width="120px"
+          style="margin-top: 30px;color:black"
+        >
+         
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>02 协助申请</h2></div></el-col>
+        </el-row >
+          <el-form-item label="申请原因">
+            <el-input type="textarea" ></el-input>
+          </el-form-item>
+          <el-form-item label="申请对象">
+            <el-select v-model="dialogForm.expert" placeholder="法务部-张三">
+              <el-option label="法务部-张三" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+          
+          <div class="footer-item">
+            <el-button @click="cancleForm">取 消</el-button>
+            <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">提交 </el-button>
+          </div>
+        </el-form>
+      </el-dialog>
+       <!-- 预警详情-->
+       <el-dialog
+        title="预警详情"
+        :visible.sync="formVisible3"
+        width="45%"
+        class="dialog-form"
+        :before-close="handleClose"
+      >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>预警基本信息</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">费用申请名称：用餐报销申请-花园酒店0620</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">编号：00001</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">消费单位：天宁区花园酒店</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">消费金额：560</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">预警信息：招待费金额超标（超192元），需要进行核对确认！</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">模型名称：报销类数据分析模型</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">模型编号：Bx-0001</div></el-col>
+        </el-row>
+        
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">预警时间：2024-06-21</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">问题状态：待处理</div></el-col>
+        </el-row>
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>02决策处置</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">处置内容:当前用户暂未处理，进行了外部协助</div></el-col>
+        </el-row >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>03协助申请</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">申请原因：当前用户对于报销标准并不熟悉。</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">申请对象：法务部-张三</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">申请时间：2024-06-25</div></el-col>
+        </el-row >
+        <el-form
+          ref="dialogForm"
+          :model="dialogForm"
+          label-width="120px"
+          style="margin-top: 30px;color:black"
+        >
+        
+            <div class="footer-item">
+              <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">关闭 </el-button>
+            </div>
+          </el-form>
+      </el-dialog>
+      <!-- 抽查核验-->
+      <el-dialog
+        title="抽查核验"
+        :visible.sync="formVisible4"
+        width="45%"
+        class="dialog-form"
+        :before-close="handleClose"
+      >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple">根据当前抽查比例，系统为你推荐下面费用申请，您也可以换一批</div></el-col>
+        </el-row >
+        <el-table
+          :data="tableData"
+          border
+          style="width: 100%">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="地址">
+          </el-table-column>
+        </el-table>
       </el-dialog>
       <!-- 导入数据 弹出栏 -->
       <el-dialog
@@ -204,7 +362,8 @@ export default {
         name: undefined,
         phone: undefined,
         married: undefined,
-        hobby: []
+        hobby: [],
+        expert:''
       },
       // 数据总条数
       total: 0,
@@ -214,16 +373,12 @@ export default {
       multipleSelection: [],
       // 新增/编辑 弹出框显示/隐藏
       formVisible: false,
+      formVisible2: false,
+      formVisible3: false,
+      formVisible4: false,
+
       // 表单校验 trigger: ['blur', 'change'] 为多个事件触发
-      formRules: {
-        name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' }
-        ],
-        phone: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }
-        ]
-      },
+  
       // 防止多次连续提交表单
       isSubmit: false,
       // 导入数据 弹出框显示/隐藏
@@ -231,7 +386,24 @@ export default {
       // 导出文件格式
       filesFormat: '.txt, .csv, .xls, .xlsx',
       // 导出数据 弹出框显示/隐藏
-      exportVisible: false
+      exportVisible: false,
+      tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
     }
   },
   created() {
@@ -245,6 +417,27 @@ export default {
     // 新建数据
     handleCreate() {
       this.formVisible = true
+      this.dialogForm.name = undefined
+      this.dialogForm.phone = undefined
+      this.dialogForm.married = undefined
+      this.dialogForm.hobby = []
+    },
+    expertHelp() {
+      this.formVisible2 = true
+      this.dialogForm.name = undefined
+      this.dialogForm.phone = undefined
+      this.dialogForm.married = undefined
+      this.dialogForm.hobby = []
+    },
+    yjDetail() {
+      this.formVisible3 = true
+      this.dialogForm.name = undefined
+      this.dialogForm.phone = undefined
+      this.dialogForm.married = undefined
+      this.dialogForm.hobby = []
+    },
+    ccCheck() {
+      this.formVisible4 = true
       this.dialogForm.name = undefined
       this.dialogForm.phone = undefined
       this.dialogForm.married = undefined
@@ -418,6 +611,23 @@ export default {
     font-size: 12px;
     color: #aaa;
     text-align: center;
+  }
+  .yj-info {
+    font-size: larger;
+    color: #30364c;
+    margin-bottom: 10px;
+  }
+  .el-dialog__header {
+    background-color:#4c8989;
+  }
+  .el-dialog__title {
+    color:white;
+  }
+  .el-dialog__body {
+    padding: 30px 50px;
+  }
+  .yj-title {
+    margin: 20px auto;
   }
 }
 </style>

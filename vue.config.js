@@ -26,18 +26,10 @@ module.exports = {
     host: '0.0.0.0', // 默认是 localhost,可不配置
     port: 8000, // 配置端口号
     open: true, // 启动是否打开浏览器
+    before: require('./mock/index.js') ,// 引入 mock/index.js
     overlay: { // 是否在浏览器上显示编译的 errors 或 warnings
       warnings: false,
       errors: true
-    },
-    proxy: {
-      '/': { // 被代理的接口名
-        target: process.env.VUE_APP_BASE_API, // url地址
-        changeOrigin: true, // 发送请求头中 host 是否设置成 target
-        pathRewrite: { // 重定向
-          '^/': ''
-        }
-      }
     }
   },
   configureWebpack(config) {

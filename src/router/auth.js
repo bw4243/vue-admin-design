@@ -2,7 +2,7 @@ import router from './index'
 import { getToken } from '../utils/cookie'
 
 // 白名单列表
-const whiteList = ['/login']
+const whiteList = ['/login', '/home']
 
 router.beforeEach((to, from, next) => {
   if (getToken()) {
@@ -18,7 +18,8 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       // 否则重定向到登录页
-      next(`/login?redirect=${to.fullPath}`)
+      // next(`/login?redirect=${to.fullPath}`)
+      next()
     }
   }
 })
