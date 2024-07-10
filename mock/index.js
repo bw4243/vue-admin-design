@@ -63,7 +63,7 @@ module.exports = function(app){
                     {
                         "id": 1006,
                         "name": "南京出差住宿0603",
-                        "sex": "男",
+                        "sex": "报销",
                         "phone": 15298621500,
                         "education": "大专",
                         "married": 1,
@@ -73,7 +73,7 @@ module.exports = function(app){
                     {
                         "id": 1007,
                         "name": "宣传周宣传海报等物料印刷费用",
-                        "sex": "女",
+                        "sex": "报销",
                         "phone": 15267499461,
                         "education": "高中",
                         "married": 1,

@@ -278,25 +278,35 @@
         :before-close="handleClose"
       >
         <el-row class="yj-info yj-title">
-          <el-col :span="24"><div class="grid-content bg-purple">根据当前抽查比例，系统为你推荐下面费用申请，您也可以换一批</div></el-col>
+          <el-col :span="24"><div class="grid-content bg-purple">根据当前抽查比例，系统为你推荐下面费用申请，您也可以<span style="color:blue">换一批</span></div></el-col>
         </el-row >
         <el-table
-          :data="tableData"
+          :data="tableData2"
           border
           style="width: 100%">
           <el-table-column
+            prop="depart"
+            label="申请部门"
+            width="180">
+          </el-table-column>
+          <el-table-column
             prop="date"
-            label="日期"
+            label="申请日期"
             width="180">
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="姓名"
+            prop="title"
+            label="报销名称"
             width="180">
           </el-table-column>
+          
           <el-table-column
-            prop="address"
-            label="地址">
+            prop="innovation"
+            label="报销费用">
+          </el-table-column>
+          <el-table-column
+            prop="average"
+            label="历史平均值">
           </el-table-column>
         </el-table>
       </el-dialog>
@@ -387,22 +397,34 @@ export default {
       filesFormat: '.txt, .csv, .xls, .xlsx',
       // 导出数据 弹出框显示/隐藏
       exportVisible: false,
-      tableData: [{
+      tableData2: [{
+          depart :'财务部',
           date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          title: '用餐报销申请-花园酒店0620',
+          name: '张三',
+          innovation: '721元',
+          average: '500元'
         }, {
+          depart :'合约部',
           date: '2016-05-04',
+          title: '办公用品批量采购-b分公司',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          innovation: '3000元',
+          average: '2000元'
         }, {
+          depart :'法务部',
           date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
+          title: '用餐报销-阳光饭店0611',
+          name: '李磊',
+          innovation: '1500元',
+          average: '500元'
         }, {
+          depart :'办公室',
           date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          title: '公车(00301)维修费用',
+          name: '旺财',
+          innovation: '23000元',
+          average: '10000元'
         }]
     }
   },
