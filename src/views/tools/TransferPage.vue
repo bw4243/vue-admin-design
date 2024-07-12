@@ -10,7 +10,7 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <el-card shadow="always">
-          <div slot="header" class="title">基础用法</div>
+          <div slot="header" class="title">人员</div>
           <div class="content-box" style="height: 360px;">
             <el-transfer v-model="value1" :data="data" />
           </div>
