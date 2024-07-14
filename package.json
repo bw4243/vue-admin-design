@@ -5,6 +5,9 @@
   "author": "baimingxuan <354372738@qq.com>",
   "private": true,
   "scripts": {
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service serve",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service build",
+    "test:unit": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service test:unit",
     "serve": "vue-cli-service serve",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service build",
     "test:unit": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service test:unit",

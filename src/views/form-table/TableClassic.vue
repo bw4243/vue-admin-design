@@ -13,6 +13,8 @@
         <el-button type="primary" @click="expertHelp">专家协助</el-button>
         <el-button type="primary" @click="yjDetail">预警详情</el-button>
         <el-button type="primary" @click="ccCheck">抽查核验</el-button>
+        <el-button type="primary" @click="checkResult">核验结果</el-button>
+
 
         <el-button type="primary" @click="handleImport">导入数据</el-button>
         <el-button type="primary" @click="exportVisible = true">导出数据</el-button>
@@ -91,7 +93,7 @@
       <Pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize" @pagination="fetchData" />
       <!-- 新增/编辑 弹出栏 -->
       <el-dialog
-        title="预警信息"
+        title="预警信息处置决策"
         :visible.sync="formVisible"
         width="45%"
         class="dialog-form"
@@ -386,6 +388,7 @@ export default {
       formVisible2: false,
       formVisible3: false,
       formVisible4: false,
+      formVisible5: false,
 
       // 表单校验 trigger: ['blur', 'change'] 为多个事件触发
   
