@@ -28,8 +28,8 @@
         label-width="90px"
         class="search-form"
       >
-        <el-form-item label="编号">
-          <el-input v-model="listQuery.id" placeholder="编号" />
+        <el-form-item label="部门名称">
+          <el-input v-model="listQuery.id" placeholder="部门名称" />
         </el-form-item>
         <el-form-item label="风险点">
           <el-input v-model="listQuery.phone" placeholder="风险点" />
@@ -84,7 +84,8 @@
         
         <el-table-column label="操作" align="center" width="200">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">处理</el-button>
+            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">做出决策</el-button>
+            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">外部协助</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -312,6 +313,63 @@
           </el-table-column>
         </el-table>
       </el-dialog>
+        <!-- 核验结果录入-->
+      <el-dialog
+        title="核验结果录入"
+        :visible.sync="formVisible5"
+        width="45%"
+        class="dialog-form"
+        :before-close="handleClose"
+      >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>预警基本信息</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">费用申请名称：用餐报销申请-花园酒店0620</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">编号：00001</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">消费单位：天宁区花园酒店</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">消费金额：560</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">预警信息：招待费金额超标（超192元），需要进行核对确认！</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">模型名称：报销类数据分析模型</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">模型编号：Bx-0001</div></el-col>
+        </el-row>
+        
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">预警时间：2024-06-21</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">问题状态：待处理</div></el-col>
+        </el-row>
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>02决策处置</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">处置内容:对该项报销进行重新核对，确认招待费超标属实，费用超标部分不予报销</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">处置时间：2024-06-26</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">附件：<span style="color: blue">财务部复核材料.doc</span></div></el-col>
+        </el-row >
+        
+        
+        <el-form
+          ref="dialogForm"
+          :model="dialogForm"
+          label-width="120px"
+          style="margin-top: 30px;color:black"
+        >
+        
+          <div class="footer-item">
+            <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">保存 </el-button>
+          </div>
+        </el-form>
+      </el-dialog>
       <!-- 导入数据 弹出栏 -->
       <el-dialog
         title="导入数据"
@@ -463,6 +521,13 @@ export default {
     },
     ccCheck() {
       this.formVisible4 = true
+      this.dialogForm.name = undefined
+      this.dialogForm.phone = undefined
+      this.dialogForm.married = undefined
+      this.dialogForm.hobby = []
+    },
+    checkResult() {
+      this.formVisible5 = true
       this.dialogForm.name = undefined
       this.dialogForm.phone = undefined
       this.dialogForm.married = undefined
