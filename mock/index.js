@@ -86,4 +86,80 @@ module.exports = function(app){
         }
         res.json(Mock.mock(json));
     });
+    app.get('/api/test2', function(rep, res){
+        // 设置要返回的数据
+        let json = {
+            "code": 0,
+            "data": {
+                "total": 100,
+                "list": [
+                    {
+                        "id": 1,
+                        "name": "合同签订监督规则",
+                        "sex": "ct-000001",
+                        "education": "启动中",
+                        "married": 1,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    },
+                    {
+                        "id": 2,
+                        "name": "合同拆分监督规则",
+                        "sex": "ct-000002",
+                        "education": "启动中",
+                        "married": 1,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    },
+                    {
+                        "id": 3,
+                        "name": "合同支付监督规则",
+                        "sex": "ct-000003",
+                        "education": "启动中",
+                        "married": 0,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    },
+                    {
+                        "id": 4,
+                        "name": "施工图设计监督",
+                        "sex": "con-000001",
+                        "education": "启动中",
+                        "married": 0,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    },
+                    {
+                        "id": 5,
+                        "name": "资金存放监督规则",
+                        "sex": "fn-000001",
+                        "education": "启动中",
+                        "married": 0,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    },
+                    {
+                        "id": 6,
+                        "name": "费用报销监督规则",
+                        "sex": "fy-0000001",
+                        "education": "启动中",
+                        "married": 1,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    },
+                    {
+                        "id": 7,
+                        "name": "投融资监督规则",
+                        "sex": "ty-0000001",
+                        "education": "启动中",
+                        "married": 1,
+                        "forbid": false,
+                        "hobby": "2024-05-02 12:00"
+                    }
+                ]
+            },
+            "errorInfo": null
+        }
+        res.json(Mock.mock(json));
+    });
 }

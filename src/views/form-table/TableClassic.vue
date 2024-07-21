@@ -12,6 +12,8 @@
         <el-button type="primary" @click="handleCreate">新建数据</el-button>
         <el-button type="primary" @click="expertHelp">专家协助</el-button>
         <el-button type="primary" @click="yjDetail">预警详情</el-button>
+        <el-button type="primary" @click="yjfk">预警反馈</el-button>
+
         <el-button type="primary" @click="ccCheck">抽查核验</el-button>
         <el-button type="primary" @click="checkResult">核验结果</el-button>
 
@@ -271,6 +273,67 @@
             </div>
           </el-form>
       </el-dialog>
+       <!-- 预警反馈-->
+       <el-dialog
+        title="预警反馈"
+        :visible.sync="formVisible6"
+        width="45%"
+        class="dialog-form"
+        :before-close="handleClose"
+      >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>预警基本信息</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">费用申请名称：用餐报销申请-花园酒店0620</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">编号：00001</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">消费单位：天宁区花园酒店</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">消费金额：560</div></el-col>
+        </el-row>
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">预警信息：招待费金额超标（超192元），需要进行核对确认！</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">模型名称：报销类数据分析模型</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">模型编号：Bx-0001</div></el-col>
+        </el-row>
+        
+        <el-row class="yj-info">
+          <el-col :span="14"><div class="grid-content bg-purple">预警时间：2024-06-21</div></el-col>
+          <el-col :span="10"><div class="grid-content bg-purple-light">问题状态：待处理</div></el-col>
+        </el-row>
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>02决策处置</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">处置内容:当前用户暂未处理，进行了外部协助</div></el-col>
+        </el-row >
+        <el-row class="yj-info yj-title">
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>03协助申请</h2></div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">申请原因：当前用户对于报销标准并不熟悉。</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">申请对象：法务部-张三</div></el-col>
+        </el-row >
+        <el-row class="yj-info">
+          <el-col :span="24"><div class="grid-content bg-purple">申请时间：2024-06-25</div></el-col>
+        </el-row >
+        <el-form
+          ref="dialogForm"
+          :model="dialogForm"
+          label-width="120px"
+          style="margin-top: 30px;color:black"
+        >
+        
+            <div class="footer-item">
+              <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">关闭 </el-button>
+            </div>
+          </el-form>
+      </el-dialog>
       <!-- 抽查核验-->
       <el-dialog
         title="抽查核验"
@@ -389,6 +452,8 @@ export default {
       formVisible3: false,
       formVisible4: false,
       formVisible5: false,
+      formVisible6: false,
+
 
       // 表单校验 trigger: ['blur', 'change'] 为多个事件触发
   
@@ -456,6 +521,13 @@ export default {
     },
     yjDetail() {
       this.formVisible3 = true
+      this.dialogForm.name = undefined
+      this.dialogForm.phone = undefined
+      this.dialogForm.married = undefined
+      this.dialogForm.hobby = []
+    },
+    yjfk() {
+      this.formVisible6 = true
       this.dialogForm.name = undefined
       this.dialogForm.phone = undefined
       this.dialogForm.married = undefined
