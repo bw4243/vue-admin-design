@@ -312,16 +312,12 @@
           <el-col :span="24"><div class="grid-content bg-purple">处置内容:当前用户暂未处理，进行了外部协助</div></el-col>
         </el-row >
         <el-row class="yj-info yj-title">
-          <el-col :span="24"><div class="grid-content bg-purple"><h2>03协助申请</h2></div></el-col>
+          <el-col :span="24"><div class="grid-content bg-purple"><h2>03结果反馈</h2></div></el-col>
         </el-row >
         <el-row class="yj-info">
-          <el-col :span="24"><div class="grid-content bg-purple">申请原因：当前用户对于报销标准并不熟悉。</div></el-col>
-        </el-row >
-        <el-row class="yj-info">
-          <el-col :span="24"><div class="grid-content bg-purple">申请对象：法务部-张三</div></el-col>
-        </el-row >
-        <el-row class="yj-info">
-          <el-col :span="24"><div class="grid-content bg-purple">申请时间：2024-06-25</div></el-col>
+          <el-form-item label="申请原因">
+            <el-input type="textarea" ></el-input>
+          </el-form-item>
         </el-row >
         <el-form
           ref="dialogForm"
