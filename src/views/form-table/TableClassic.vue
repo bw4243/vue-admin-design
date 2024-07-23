@@ -323,10 +323,10 @@
         <el-form-item label="反馈内容">
           <el-input type="textarea" ></el-input>
         </el-form-item>
-        <el-col :span="12">
-          <label for="">上传</label>
+        <el-col :span="6">
+          <label style="padding-left: 50px;" for="">上传证明材料</label>
         </el-col>
-          <el-col :span="4">
+          <el-col :span="10">
             <el-upload
             class="upload-demo"
             action="https://jsonplaceholder.typicode.com/posts/"
@@ -510,7 +510,7 @@ export default {
         hobby: [],
         expert:''
       },
-      fileList,
+      fileList: [],
       // 数据总条数
       total: 0,
       // 表格数据数组
