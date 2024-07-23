@@ -314,22 +314,38 @@
         <el-row class="yj-info yj-title">
           <el-col :span="24"><div class="grid-content bg-purple"><h2>03结果反馈</h2></div></el-col>
         </el-row >
-        <el-row class="yj-info">
-          <el-form-item label="申请原因">
-            <el-input type="textarea" ></el-input>
-          </el-form-item>
-        </el-row >
         <el-form
           ref="dialogForm"
           :model="dialogForm"
           label-width="120px"
           style="margin-top: 30px;color:black"
         >
+        <el-form-item label="反馈内容">
+          <el-input type="textarea" ></el-input>
+        </el-form-item>
+        <el-col :span="12">
+          <label for="">上传</label>
+        </el-col>
+          <el-col :span="4">
+            <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList">
+            <el-button size="big" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">请上传doc、docx、pdf格式文件</div>
+          </el-upload>
+        </el-col>
         
-            <div class="footer-item">
-              <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">关闭 </el-button>
-            </div>
-          </el-form>
+        <div class="footer-item">
+          <el-button type="primary" :disabled="isSubmit" @click="submitForm('dialogForm')">关闭 </el-button>
+        </div>
+        </el-form>
       </el-dialog>
       <!-- 抽查核验-->
       <el-dialog
@@ -494,6 +510,7 @@ export default {
         hobby: [],
         expert:''
       },
+      fileList,
       // 数据总条数
       total: 0,
       // 表格数据数组
