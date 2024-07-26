@@ -16,7 +16,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/form-table/table-classic',
     meta: {
-      title: '表格&表单',
+      title: '工程管理监督',
       icon: 'vue-dsn-icon-biaoge'
     },
     children: [
@@ -52,7 +52,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/image/image-cropper',
     meta: {
-      title: '图片处理',
+      title: '合同管理监督',
       icon: 'vue-dsn-icon-picture'
     },
     children: [
@@ -88,7 +88,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/video/video-player',
     meta: {
-      title: '视频处理',
+      title: '财务管理监督',
       icon: 'vue-dsn-icon-video'
     },
     children: [
@@ -116,7 +116,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/tools/image-upload',
     meta: {
-      title: '组件',
+      title: '人事管理监督',
       icon: 'vue-dsn-icon-zujian'
     },
     children: [
@@ -179,7 +179,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/editors/markdown',
     meta: {
-      title: '编辑器',
+      title: '报销管理监督',
       icon: 'vue-dsn-icon-bianjiqi'
     },
     children: [
@@ -207,7 +207,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/tree/org-tree',
     meta: {
-      title: '树形结构',
+      title: '基础设置',
       icon: 'vue-dsn-icon-shuxing'
     },
     children: [
@@ -235,7 +235,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/graph-editors/flow',
     meta: {
-      title: '图形编辑器',
+      title: '模型管理',
       icon: 'vue-dsn-icon-excel'
     },
     children: [
