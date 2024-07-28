@@ -73,7 +73,7 @@ export default {
           {
             type: 'value',
             max: value => {
-              return Math.ceil(value.max / 100) * 100 + 300
+              return Math.ceil(value.max / 100) * 100 + 50
             }
           }
         ],

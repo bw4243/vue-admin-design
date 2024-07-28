@@ -263,7 +263,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/excel/export-excel',
     meta: {
-      title: 'Excel',
+      title: '统计报表',
       icon: 'vue-dsn-icon-excel'
     },
     children: [
@@ -291,7 +291,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/error-page/page-401',
     meta: {
-      title: '错误页面',
+      title: '系统集成',
       icon: 'vue-dsn-icon-bug'
     },
     children: [

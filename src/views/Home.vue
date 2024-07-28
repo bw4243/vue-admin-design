@@ -40,7 +40,7 @@
       </el-col>
       <el-col :span="12">
         <el-card shadow="always" :body-style="{padding: '0px'}">
-          <ChartsLine :title="title" :data="commonChartsData" class="data-chart" />
+          <ChartsLine :title="title2" :data="commonChartsData" class="data-chart" />
         </el-card>
       </el-col>
     </el-row>
@@ -58,7 +58,9 @@ export default {
   data() {
     return {
       text: '数据来源',
-      title: '近七天用户访问量条形图',
+      title: '近七天发现监督风险点数量',
+      title2: '近七天访问人数数量',
+
       langsData: [
         { name: '监督办公室', value: 45, color: '#2d8cf0' },
         { name: '计划财务部', value: 32, color: '#19be6b' },
@@ -79,13 +81,13 @@ export default {
         { value: 3, name: '人力资源系统' }
       ],
       commonChartsData: {
-        Mon: 782,
-        Tue: 925,
-        Wed: 1196,
-        Thu: 812,
-        Fri: 328,
-        Sat: 222,
-        Sun: 1080
+        Mon: 78,
+        Tue: 92,
+        Wed: 116,
+        Thu: 82,
+        Fri: 38,
+        Sat: 22,
+        Sun: 100
       }
     }
   }
