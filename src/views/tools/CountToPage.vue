@@ -1,63 +1,49 @@
 <template>
   <div class="count-to-page">
     <Hints>
-      <template slot="hintName">数字滚动组件</template>
+      <template slot="hintName">监督模型配置管理模块</template>
       <template slot="hintInfo">
-        <p>vue-countTo:一个无依赖、轻量级的vue数字滚动插件，可以通过你自己的方式轻松编写</p>
-        <p>github地址：访问 <el-link type="success" href="https://github.com/PanJiaChen/vue-countTo" target="_blank">vue-countTo</el-link></p>
+        <p>系统支持通过修改设置配置项来自定义监督模型规则参数</p>
       </template>
     </Hints>
     <el-row class="count-to-box" :gutter="20">
-      <el-col :span="6">
-        <el-card shadow="always" :body-style="{padding: '0px'}">
-          <div slot="header" class="title">正向增加</div>
-          <div class="box-cont add">
-            <CountTo :start-val="0" :end-val="2020" :duration="4000" />
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
+      <el-col :span="24">
         <el-card shadow="always" :body-style="{padding: '0px'}">
           <div slot="header" class="title">自定义配置</div>
           <div class="cont-wrapper">
             <div class="cont-set-data">
-              <CountTo ref="countBox" :start-val="startVal" :end-val="endVal" :duration="duration" :decimals="decimals" :separator="separator" :prefix="prefix" :suffix="suffix" :autoplay="false" />
+              <span>合同管理监督规则配置项</span>
             </div>
             <div class="box-cont-set">
               <div class="cont-set-item">
-                <label>startVal：</label><el-input v-model="startVal" />
+                <label>合同签订最小金额：</label><el-input v-model="startVal" />
               </div>
               <div class="cont-set-item">
-                <label>endVal：</label><el-input v-model="endVal" />
+                <label>合同未履约最大超期时间</label><el-input v-model="endVal" />
               </div>
               <div class="cont-set-item">
-                <label>duration：</label><el-input v-model="duration" />
+                <label>合同拆分最小数量：</label><el-input v-model="duration" />
               </div>
               <div class="cont-set-item">
-                <label>decimals：</label><el-input v-model="decimals" />
+                <label>合同签订主体起始风险等级：</label><el-input v-model="decimals" />
               </div>
               <div class="cont-set-item">
-                <label>separator：</label><el-input v-model="separator" />
+                <label>保函录入最大超期时间（天）:</label><el-input v-model="separator" />
               </div>
               <div class="cont-set-item">
-                <label>prefix：</label><el-input v-model="prefix" />
+                <label>退保函最大超期时间（天）：</label><el-input v-model="prefix" />
               </div>
               <div class="cont-set-item">
-                <label>suffix：</label><el-input v-model="suffix" />
+                <label>合同签订风险系数控制模型分值最小值：</label><el-input v-model="suffix" />
               </div>
               <div class="cont-set-item">
-                <el-button type="primary" @click="handleStart">开始</el-button>
-                <el-button type="danger" @click="handlePause">暂停/恢复</el-button>
+                <label>：</label><el-input v-model="suffix" />
+              </div>
+              <div class="cont-set-item">
+                <el-button type="primary" @click="handleStart">保存</el-button>
+                <el-button type="danger" @click="handlePause">取消</el-button>
               </div>
             </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card shadow="always" :body-style="{padding: '0px'}">
-          <div slot="header" class="title">反向减少</div>
-          <div class="box-cont">
-            <CountTo :start-val="2020" :end-val="0" :duration="4000" />
           </div>
         </el-card>
       </el-col>
@@ -120,7 +106,7 @@ export default {
     box-sizing: border-box;
     .cont-set-item {
       display: inline-block;
-      width: 32%;
+      width: 49%;
       margin-bottom: 10px;
       label {
         display: inline-block;
