@@ -23,8 +23,7 @@
         <el-table-column prop="education" label="当前状态" align="center" />
         <el-table-column align="center" label="操作" width="200">
           <template slot-scope="{row}">
-            <el-button v-if="row.editable" type="error" size="small" @click="confirmEdit(row)">停止</el-button>
-            <el-button v-else type="danger" size="small" @click="row.editable = !row.editable">停止</el-button>
+            <el-button type="danger" size="small" @click="confirmEdit(row)">停止</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -77,9 +76,18 @@ export default {
       row.editable = false
     },
     confirmEdit(row) {
-      row.editable = false
-      row.originalHobby = row.hobby
-      // 此处添加 后端保存数据接口
+      this.$confirm('此操作将暂停该, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 此处可添加--删除接口
+        // 删除成功调用fetchData方法更新列表
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      })
     }
   }
 }
