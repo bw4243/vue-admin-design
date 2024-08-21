@@ -64,7 +64,7 @@
             <el-popover trigger="hover" placement="top">
               <p>姓名: {{ scope.row.name }}</p>
               <p>手机: {{ scope.row.phone }}</p>
-              <p>爱好: {{ scope.row.hobby }}</p>
+              <p>关键字: {{ scope.row.hobby }}</p>
               <div slot="reference">
                 <el-tag size="medium">{{ scope.row.name }}</el-tag>
               </div>

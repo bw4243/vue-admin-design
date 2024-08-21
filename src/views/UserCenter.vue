@@ -10,12 +10,12 @@
           <span>{{ userInfo.username }}</span>
         </li>
         <li>
-          <label>角色：</label>
+          <label>部门：</label>
           <span>{{ userInfo.roles }}</span>
         </li>
         <li>
-          <label>昵称：</label>
-          <span>{{ userInfo.nickname }}</span>
+          <label>岗位：</label>
+          <span>{{ userInfo.gw }}</span>
         </li>
         <li>
           <label>电话号码：</label>
@@ -26,12 +26,8 @@
           <span>{{ userInfo.email }}</span>
         </li>
         <li>
-          <label>创建时间：</label>
+          <label>入职时间：</label>
           <span>{{ userInfo.createtime }}</span>
-        </li>
-        <li>
-          <label>更新时间：</label>
-          <span>{{ userInfo.updatetime }}</span>
         </li>
       </ul>
     </el-card>
@@ -45,7 +41,14 @@ export default {
   name: 'UserCenter',
   data() {
     return {
-      userInfo: {}
+      userInfo: {
+        username: '张三',
+        roles: '信息化部',
+        gw: '信息技术',
+        phone: '13112341234',
+        createtime: '2019-01-01',
+        email: 'name001@xx.com'
+      }
     }
   },
   created() {
