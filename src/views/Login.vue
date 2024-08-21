@@ -2,7 +2,7 @@
   <div class="login-wrapper" :style="'background-image:url('+ Background +')'">
     <div class="form-box">
       <div class="form-title">
-        <h2>企业信息化监督系统</h2>
+        <h2>企业信息监督收集系统</h2>
         <p>账 号 登 录</p>
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">

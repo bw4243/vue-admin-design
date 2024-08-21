@@ -3,7 +3,7 @@
     <div class="side-container" :class="collapsed ? 'folded' : 'unfolded'">
       <div class="logo">
         <a href="/">
-          <div style="padding: 20px 50px;"><span style="font-size: 20px;color:aliceblue;" >监督系统</span></div>
+          <div style="padding: 20px 50px;"><span style="font-size: 20px;color:aliceblue;" >企业信息监督收集系统</span></div>
         </a>
       </div>
       <SideMenu />

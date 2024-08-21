@@ -41,7 +41,7 @@ export const asyncRoutes = [
         name: 'TableInlineEdit',
         component: () => import('../views/form-table/TableInlineEdit'),
         meta: {
-          title: '行内编辑表格'
+          title: '规则模型配置管理'
         }
       }
     ]
