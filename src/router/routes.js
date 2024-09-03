@@ -25,7 +25,7 @@ export const asyncRoutes = [
         name: 'TableClassic',
         component: () => import('../views/form-table/TableClassic'),
         meta: {
-          title: '综合表格'
+          title: '反馈处理'
         }
       },
       {

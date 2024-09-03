@@ -86,9 +86,11 @@
         
         <el-table-column label="操作" align="center" width="200">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">做出决策</el-button>
-            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">外部协助</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">结果反馈</el-button>
+            <!--
+              <el-button size="mini" type="primary" :disabled="scope.row.forbid" @click="handleEdit(scope.$index, scope.row)">外部协助</el-button>
+              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            -->
           </template>
         </el-table-column>
       </el-table>
